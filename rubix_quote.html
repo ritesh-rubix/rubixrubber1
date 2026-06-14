@@ -57,44 +57,55 @@ footer{background:var(--slate-dark);padding:56px 3rem 28px;}.fi{max-width:1200px
 </div></div>
 <div class="qwrap"><div class="qgrid">
   <div>
-    <div class="form-sec-title">Your Details</div>
-    <form data-fs method="POST" id="quote-form">
-      <input type="hidden" name="_subject" value="Quote Request — Rubix Rubber">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="rubix_quote_thanks.html">
-      <input type="hidden" name="_template" value="table">
-      <div class="form-row">
-        <div class="fg"><label>Full Name <span class="req">*</span></label><input type="text" name="Full Name" required placeholder="John Smith" autocomplete="name"></div>
-        <div class="fg"><label>Company Name <span class="req">*</span></label><input type="text" name="Company" required placeholder="Acme Industries"></div>
-      </div>
-      <div class="form-row">
-        <div class="fg"><label>Email Address <span class="req">*</span></label><input type="email" name="Email" required placeholder="john@company.com" autocomplete="email"></div>
-        <div class="fg"><label>Phone Number</label><input type="tel" name="Phone" placeholder="+91 98765 43210" autocomplete="tel"></div>
-      </div>
-      <div class="form-sec-title" style="margin-top:24px;">Product Requirements</div>
-      <div class="fg"><label>Compound / Product <span class="req">*</span></label>
-        <select name="Compound" id="product-select" required>
-          <option value="">— Select a compound —</option><option value="polyurethane">Polyurethane</option><option value="polyacrylic">Polyacrylic</option><option value="neoprene">Neoprene</option><option value="silicone">Silicone</option><option value="natural">Natural</option><option value="hypalon">Hypalon</option><option value="nitrile">Nitrile</option><option value="hnbr">HNBR</option><option value="xnbr">XNBR</option><option value="viton">Viton</option><option value="aflas">AFLAS</option><option value="epdm">EPDM</option><option value="butyl">BUTYL</option><option value="sbr">SBR</option><option value="epr">EPR</option>
-          <option value="custom">Custom / Not Listed</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <div class="fg"><label>Quantity Required</label><input type="text" name="Quantity" placeholder="e.g. 500 kg / 1000 units"></div>
-        <div class="fg"><label>Target Industry</label><select name="Industry"><option value="">— Select —</option><option>Automobile</option><option>Electrical</option><option>Plumbing &amp; Bathware</option><option>Oil &amp; Gas</option><option>Home Appliance</option><option>Construction</option><option>Marine</option><option>Aerospace</option><option>Other</option></select></div>
-      </div>
-      <div class="form-row">
-        <div class="fg"><label>Hardness (Shore A)</label><input type="text" name="Hardness" placeholder="e.g. 40–60 Shore A"></div>
-        <div class="fg"><label>Timeline</label><select name="Timeline"><option value="">— Select —</option><option>Urgent (within 1 week)</option><option>Standard (2–4 weeks)</option><option>Flexible (1–3 months)</option><option>Planning phase</option></select></div>
-      </div>
-      <div class="fg"><label>Technical Specifications / Notes</label>
-        <textarea name="Specifications" placeholder="Dimensions, temperature range, chemical exposure, compliance standards, application details..."></textarea>
-      </div>
-      <button type="submit" class="submit-btn">Submit Quote Request →</button>
-    </form>
-    <div class="notice">
-      <strong>ℹ️ First-time activation:</strong> The very first submission triggers a one-time confirmation from FormSubmit to <strong><span data-em>ritesh.mehta@rubixrubber.com</span></strong> — click "Confirm" in that email to activate. Or contact directly: <a href="mailto:ritesh.mehta@rubixrubber.com" data-em>ritesh.mehta@rubixrubber.com</a>
+    
+<div id="quote-success" style="display:none;background:#EFF6FF;border:2px solid #DBEAFE;border-radius:14px;padding:40px 32px;text-align:center;">
+  <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#1B4FCC" stroke-width="1.5" style="margin:0 auto 16px;display:block;"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+  <h3 style="font-size:22px;font-weight:700;color:#1B2D4F;margin-bottom:10px;">Quote Request Received!</h3>
+  <p style="font-size:15px;color:#64748B;line-height:1.7;margin-bottom:24px;">Thank you for your request. Our team will review your specifications and respond within 24 business hours.</p>
+  <a href="index.html" style="display:inline-flex;align-items:center;background:#1B4FCC;color:#fff;font-size:14px;font-weight:600;padding:13px 26px;border-radius:50px;text-decoration:none;">Back to Home</a>
+</div>
+
+<div class="form-sec-title">Your Details</div>
+<form id="quote-form" method="POST">
+  <input type="hidden" name="_subject" value="Quote Request — Rubix Rubber">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_template" value="table">
+  <div class="form-row">
+    <div class="fg"><label>Full Name <span class="req">*</span></label><input type="text" name="Full Name" required placeholder="John Smith" autocomplete="name"></div>
+    <div class="fg"><label>Company Name <span class="req">*</span></label><input type="text" name="Company" required placeholder="Acme Industries"></div>
+  </div>
+  <div class="form-row">
+    <div class="fg"><label>Email Address <span class="req">*</span></label><input type="email" name="email" required placeholder="john@company.com" autocomplete="email"></div>
+    <div class="fg"><label>Phone Number</label><input type="tel" name="Phone" placeholder="+91 98765 43210" autocomplete="tel"></div>
+  </div>
+  <div class="form-sec-title" style="margin-top:24px;">Product Requirements</div>
+  <div class="fg"><label>Compound / Product <span class="req">*</span></label>
+    <select name="Compound" id="product-select" required>
+      <option value="">— Select a compound —</option><option value="polyurethane">Polyurethane</option><option value="polyacrylic">Polyacrylic</option><option value="neoprene">Neoprene</option><option value="silicone">Silicone</option><option value="natural">Natural</option><option value="hypalon">Hypalon</option><option value="nitrile">Nitrile</option><option value="hnbr">HNBR</option><option value="xnbr">XNBR</option><option value="viton">Viton</option><option value="aflas">AFLAS</option><option value="epdm">EPDM</option><option value="butyl">BUTYL</option><option value="sbr">SBR</option><option value="epr">EPR</option>
+      <option value="custom">Custom / Not Listed</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <div class="fg"><label>Quantity Required</label><input type="text" name="Quantity" placeholder="e.g. 500 kg / 1000 units"></div>
+    <div class="fg"><label>Target Industry</label>
+      <select name="Industry"><option value="">— Select —</option><option>Automobile</option><option>Electrical</option><option>Plumbing &amp; Bathware</option><option>Oil &amp; Gas</option><option>Home Appliance</option><option>Construction</option><option>Marine</option><option>Aerospace</option><option>Other</option></select>
     </div>
   </div>
+  <div class="form-row">
+    <div class="fg"><label>Hardness (Shore A)</label><input type="text" name="Hardness" placeholder="e.g. 40–60 Shore A"></div>
+    <div class="fg"><label>Timeline</label>
+      <select name="Timeline"><option value="">— Select —</option><option>Urgent (within 1 week)</option><option>Standard (2–4 weeks)</option><option>Flexible (1–3 months)</option><option>Planning phase</option></select>
+    </div>
+  </div>
+  <div class="fg"><label>Technical Specifications / Notes</label>
+    <textarea name="Specifications" placeholder="Dimensions, temperature range, chemical exposure, compliance standards, application details..."></textarea>
+  </div>
+  <button type="submit" id="quote-btn" class="submit-btn">Submit Quote Request &#8594;</button>
+</form>
+<div style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:8px;padding:14px;margin-top:14px;font-size:13px;color:#92400E;line-height:1.6;">
+  <strong>&#8505;&#65039; Note:</strong> On first use, FormSubmit sends a one-time confirmation to <strong>sales@rubixrubber.com</strong> — click Confirm to activate. Or email directly: <a href="mailto:sales@rubixrubber.com" style="color:#92400E;font-weight:700;">sales@rubixrubber.com</a>
+</div>
+</div>
   <div class="q-sidebar">
     <div class="q-info"><h3>Why Choose Us</h3>
       <div class="qi"><div class="qi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><strong>24-Hour Response</strong><p>Every quote reviewed personally within one business day.</p></div></div>
@@ -102,16 +113,16 @@ footer{background:var(--slate-dark);padding:56px 3rem 28px;}.fi{max-width:1200px
       <div class="qi"><div class="qi-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><div><strong>100% In-House</strong><p>Zero subcontracting — tighter quality, faster delivery.</p></div></div>
       <div class="qi"><div class="qi-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><div><strong>15+ Compounds</strong><p>From general-purpose SBR to high-performance AFLAS.</p></div></div>
     </div>
-    <div class="q-direct"><h4>Prefer to call or email?</h4><p><a href="tel:+919082409656">+91 90824 09656</a><br><a href="mailto:ritesh.mehta@rubixrubber.com" data-em>ritesh.mehta@rubixrubber.com</a><br><br>Mon–Sat, 9 AM – 6 PM IST</p></div>
+    <div class="q-direct"><h4>Prefer to call or email?</h4><p><a href="tel:+919082409656">+91 90824 09656</a><br><a href="mailto:sales@rubixrubber.com" data-em>sales@rubixrubber.com</a><br><br>Mon–Sat, 9 AM – 6 PM IST</p></div>
   </div>
 </div></div>
-<script>var p=new URLSearchParams(window.location.search);if(p.get('product')){var s=document.getElementById('product-select');for(var i=0;i<s.options.length;i++)if(s.options[i].value===p.get('product')){s.selectedIndex=i;break;}}</script><footer><div class="fi"><div class="ft">
+<footer><div class="fi"><div class="ft">
 <div>
   <div class="fb">Rubix Rubber Ventures LLP</div>
   <div class="fci-wrap" style="margin-top:4px;">
     <div class="fci"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Mumbai, India</div>
     <div class="fci"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 5.18 2 2 0 015 3h3a2 2 0 012 1.72 12.05 12.05 0 00.7 2.81 2 2 0 01-.45 2.11L9.09 10a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.05 12.05 0 002.81.7A2 2 0 0122 16.92z"/></svg><a href="tel:+919082409656">+91 90824 09656</a></div>
-    <div class="fci"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg><a href="#" data-em>ritesh.mehta@rubixrubber.com</a></div>
+    <div class="fci"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg><a href="#" data-em>sales@rubixrubber.com</a></div>
   </div>
 </div>
 <div><div class="fct">Quick Links</div><div class="fl">
@@ -124,18 +135,86 @@ footer{background:var(--slate-dark);padding:56px 3rem 28px;}.fi{max-width:1200px
   <div class="fl"><a href="rubix_catalog.html#hypalon">Hypalon</a><a href="rubix_catalog.html#polyurethane">Polyurethane</a><a href="rubix_catalog.html#viton">Viton</a><a href="rubix_catalog.html#aflas">AFLAS</a><a href="rubix_catalog.html#polyacrylic">Polyacrylic</a><a href="rubix_catalog.html#epr">EPR</a></div>
 </div></div>
 </div>
-<div class="fbot"><div class="fbot-c">© 2026 Rubix Rubber Ventures LLP. All rights reserved.</div><div class="fbot-l"><a href="#">Privacy Policy</a><a href="#">Terms</a></div></div>
-</div></footer><script>
-(function(){
-  var u='ritesh.mehta',d='rubixrubber.com',e=u+'@'+d;
-  // Set all form actions
-  document.querySelectorAll('form[data-fs]').forEach(function(f){
-    f.action='https://formsubmit.co/'+e;
+<div class="fbot">
+  <div class="fbot-c">&copy; 2026 Rubix Rubber Ventures LLP. All rights reserved.</div>
+  <div class="fbot-l"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+</div></div></footer><script>var p=new URLSearchParams(window.location.search);if(p.get('product')){var s=document.getElementById('product-select');for(var i=0;i<s.options.length;i++)if(s.options[i].value===p.get('product')){s.selectedIndex=i;break;}}</script>
+<script>
+/* Rubix Rubber — Form handler + nav */
+(function() {
+  var EU = 'sales', ED = 'rubixrubber.com';
+  var EM = EU + '@' + ED;
+  var ENDPOINT = 'https://formsubmit.co/ajax/' + EM;
+
+  /* ── Reveal email text/links ── */
+  document.querySelectorAll('[data-em]').forEach(function(el) {
+    el.textContent = EM;
+    if (el.tagName === 'A') el.href = 'mailto:' + EM;
   });
-  // Reveal email addresses in the page
-  document.querySelectorAll('[data-em]').forEach(function(el){
-    el.textContent=e;
-    if(el.tagName==='A')el.href='mailto:'+e;
-  });
+
+  /* ── AJAX form handler ── */
+  function handleForm(formId, successId, btnId) {
+    var form = document.getElementById(formId);
+    if (!form) return;
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById(btnId);
+      var orig = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+      var data = new FormData(form);
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(res) {
+        if (res.success === 'true' || res.success === true) {
+          form.style.display = 'none';
+          var box = document.getElementById(successId);
+          if (box) box.style.display = 'block';
+        } else {
+          alert('Something went wrong. Please email us directly at ' + EM);
+          if (btn) { btn.disabled = false; btn.textContent = orig; }
+        }
+      })
+      .catch(function() {
+        alert('Could not send. Please email us directly at ' + EM);
+        if (btn) { btn.disabled = false; btn.textContent = orig; }
+      });
+    });
+  }
+
+  handleForm('contact-form', 'contact-success', 'contact-btn');
+  handleForm('quote-form',   'quote-success',   'quote-btn');
+
+  /* ── Hamburger nav ── */
+  var hb = document.getElementById('hb');
+  var dr = document.getElementById('mob-drawer');
+  if (hb && dr) {
+    hb.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var o = dr.classList.toggle('open');
+      hb.classList.toggle('open', o);
+      document.body.style.overflow = o ? 'hidden' : '';
+    });
+    dr.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        dr.classList.remove('open');
+        hb.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+    document.addEventListener('click', function(e) {
+      if (!hb.contains(e.target) && !dr.contains(e.target)) {
+        dr.classList.remove('open');
+        hb.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  }
 })();
-</script><script>(function(){var hb=document.getElementById('hb'),dr=document.getElementById('mob-drawer');if(!hb||!dr)return;hb.addEventListener('click',function(e){e.stopPropagation();var o=dr.classList.toggle('open');hb.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});dr.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){dr.classList.remove('open');hb.classList.remove('open');document.body.style.overflow='';});});document.addEventListener('click',function(e){if(!hb.contains(e.target)&&!dr.contains(e.target)){dr.classList.remove('open');hb.classList.remove('open');document.body.style.overflow='';}});})();</script></body></html>
+</script>
+</body></html>

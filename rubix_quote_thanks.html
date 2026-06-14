@@ -55,7 +55,7 @@ footer{background:var(--slate-dark);padding:56px 3rem 28px;}.fi{max-width:1200px
   <div class="fci-wrap" style="margin-top:4px;">
     <div class="fci"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Mumbai, India</div>
     <div class="fci"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 5.18 2 2 0 015 3h3a2 2 0 012 1.72 12.05 12.05 0 00.7 2.81 2 2 0 01-.45 2.11L9.09 10a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.05 12.05 0 002.81.7A2 2 0 0122 16.92z"/></svg><a href="tel:+919082409656">+91 90824 09656</a></div>
-    <div class="fci"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg><a href="#" data-em>ritesh.mehta@rubixrubber.com</a></div>
+    <div class="fci"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg><a href="#" data-em>sales@rubixrubber.com</a></div>
   </div>
 </div>
 <div><div class="fct">Quick Links</div><div class="fl">
@@ -68,8 +68,87 @@ footer{background:var(--slate-dark);padding:56px 3rem 28px;}.fi{max-width:1200px
   <div class="fl"><a href="rubix_catalog.html#hypalon">Hypalon</a><a href="rubix_catalog.html#polyurethane">Polyurethane</a><a href="rubix_catalog.html#viton">Viton</a><a href="rubix_catalog.html#aflas">AFLAS</a><a href="rubix_catalog.html#polyacrylic">Polyacrylic</a><a href="rubix_catalog.html#epr">EPR</a></div>
 </div></div>
 </div>
-<div class="fbot"><div class="fbot-c">© 2026 Rubix Rubber Ventures LLP. All rights reserved.</div><div class="fbot-l"><a href="#">Privacy Policy</a><a href="#">Terms</a></div></div>
-</div></footer><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){var hb=document.getElementById('hb'),dr=document.getElementById('mob-drawer');if(!hb||!dr)return;hb.addEventListener('click',function(e){e.stopPropagation();var o=dr.classList.toggle('open');hb.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});dr.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){dr.classList.remove('open');hb.classList.remove('o
-<script>(function(){var u='ritesh.mehta',d='rubixrubber.com',e=u+'@'+d;document.querySelectorAll('form[data-fs]').forEach(function(f){f.action='https://formsubmit.co/'+e;});document.querySelectorAll('[data-em]').forEach(function(el){el.textContent=e;if(el.tagName==='A')el.href='mailto:'+e;});})();</script>
+<div class="fbot">
+  <div class="fbot-c">&copy; 2026 Rubix Rubber Ventures LLP. All rights reserved.</div>
+  <div class="fbot-l"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+</div></div></footer><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+/* Rubix Rubber — Form handler + nav */
+(function() {
+  var EU = 'sales', ED = 'rubixrubber.com';
+  var EM = EU + '@' + ED;
+  var ENDPOINT = 'https://formsubmit.co/ajax/' + EM;
+
+  /* ── Reveal email text/links ── */
+  document.querySelectorAll('[data-em]').forEach(function(el) {
+    el.textContent = EM;
+    if (el.tagName === 'A') el.href = 'mailto:' + EM;
+  });
+
+  /* ── AJAX form handler ── */
+  function handleForm(formId, successId, btnId) {
+    var form = document.getElementById(formId);
+    if (!form) return;
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById(btnId);
+      var orig = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+      var data = new FormData(form);
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(res) {
+        if (res.success === 'true' || res.success === true) {
+          form.style.display = 'none';
+          var box = document.getElementById(successId);
+          if (box) box.style.display = 'block';
+        } else {
+          alert('Something went wrong. Please email us directly at ' + EM);
+          if (btn) { btn.disabled = false; btn.textContent = orig; }
+        }
+      })
+      .catch(function() {
+        alert('Could not send. Please email us directly at ' + EM);
+        if (btn) { btn.disabled = false; btn.textContent = orig; }
+      });
+    });
+  }
+
+  handleForm('contact-form', 'contact-success', 'contact-btn');
+  handleForm('quote-form',   'quote-success',   'quote-btn');
+
+  /* ── Hamburger nav ── */
+  var hb = document.getElementById('hb');
+  var dr = document.getElementById('mob-drawer');
+  if (hb && dr) {
+    hb.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var o = dr.classList.toggle('open');
+      hb.classList.toggle('open', o);
+      document.body.style.overflow = o ? 'hidden' : '';
+    });
+    dr.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        dr.classList.remove('open');
+        hb.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+    document.addEventListener('click', function(e) {
+      if (!hb.contains(e.target) && !dr.contains(e.target)) {
+        dr.classList.remove('open');
+        hb.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+})();
+</script>
 </body>
 </html>

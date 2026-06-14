@@ -263,23 +263,88 @@ footer{background:var(--slate-dark);padding:56px 3rem 28px;}
   <div class="fl"><a href="rubix_catalog.html#hypalon">Hypalon</a><a href="rubix_catalog.html#polyurethane">Polyurethane</a><a href="rubix_catalog.html#viton">Viton</a><a href="rubix_catalog.html#aflas">AFLAS</a><a href="rubix_catalog.html#polyacrylic">Polyacrylic</a><a href="rubix_catalog.html#epr">EPR</a></div>
 </div></div>
 </div>
-<div class="fbot"><div class="fbot-c">© 2026 Rubix Rubber Ventures LLP. All rights reserved.</div><div class="fbot-l"><a href="#">Privacy Policy</a><a href="#">Terms</a></div></div>
-</div></footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-(function(){
-  var hb=document.getElementById('hb'),dr=document.getElementById('mob-drawer');
-  if(!hb||!dr)return;
-  hb.addEventListener('click',function(e){
-    e.stopPropagation();
-    var o=dr.classList.toggle('open');
-    hb.classList.toggle('open',o);
-    document.body.style.overflow=o?'hidden':'';
+<div class="fbot">
+  <div class="fbot-c">&copy; 2026 Rubix Rubber Ventures LLP. All rights reserved.</div>
+  <div class="fbot-l"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+</div></div></footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+/* Rubix Rubber — Form handler + nav */
+(function() {
+  var EU = 'sales', ED = 'rubixrubber.com';
+  var EM = EU + '@' + ED;
+  var ENDPOINT = 'https://formsubmit.co/ajax/' + EM;
+
+  /* ── Reveal email text/links ── */
+  document.querySelectorAll('[data-em]').forEach(function(el) {
+    el.textContent = EM;
+    if (el.tagName === 'A') el.href = 'mailto:' + EM;
   });
-  dr.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click',function(){
-      dr.classList.remove('open');hb.classList.remove('open');
-      document.body.style.overflow='';
-  
-<script>(function(){var u='sales',d='rubixrubber.com',e=u+'@'+d;document.querySelectorAll('form[data-fs]').forEach(function(f){f.action='https://formsubmit.co/'+e;});document.querySelectorAll('[data-em]').forEach(function(el){el.textContent=e;if(el.tagName==='A')el.href='mailto:'+e;});})();</script>
+
+  /* ── AJAX form handler ── */
+  function handleForm(formId, successId, btnId) {
+    var form = document.getElementById(formId);
+    if (!form) return;
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById(btnId);
+      var orig = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+      var data = new FormData(form);
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(res) {
+        if (res.success === 'true' || res.success === true) {
+          form.style.display = 'none';
+          var box = document.getElementById(successId);
+          if (box) box.style.display = 'block';
+        } else {
+          alert('Something went wrong. Please email us directly at ' + EM);
+          if (btn) { btn.disabled = false; btn.textContent = orig; }
+        }
+      })
+      .catch(function() {
+        alert('Could not send. Please email us directly at ' + EM);
+        if (btn) { btn.disabled = false; btn.textContent = orig; }
+      });
+    });
+  }
+
+  handleForm('contact-form', 'contact-success', 'contact-btn');
+  handleForm('quote-form',   'quote-success',   'quote-btn');
+
+  /* ── Hamburger nav ── */
+  var hb = document.getElementById('hb');
+  var dr = document.getElementById('mob-drawer');
+  if (hb && dr) {
+    hb.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var o = dr.classList.toggle('open');
+      hb.classList.toggle('open', o);
+      document.body.style.overflow = o ? 'hidden' : '';
+    });
+    dr.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        dr.classList.remove('open');
+        hb.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+    document.addEventListener('click', function(e) {
+      if (!hb.contains(e.target) && !dr.contains(e.target)) {
+        dr.classList.remove('open');
+        hb.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+})();
+</script>
 </body>
 </html>
